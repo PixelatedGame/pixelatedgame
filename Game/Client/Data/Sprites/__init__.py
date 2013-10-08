@@ -4,7 +4,7 @@ from Game.Client.Data.Sprites import pixel_sprite
 from Game.Client.Data.Sprites.pixel_sprite import Pixel_Sprite
 import Game
 
-sprites_dir = 'c:\Data\sprites'
+sprites_dir = 'data\Sprites'
 group_dict = {}
 sprite_dict = {}
 object_dict = {}

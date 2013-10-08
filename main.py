@@ -33,7 +33,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((500, 500))
     
-    pygame.display.set_caption('Monkey Fever')
+    pygame.display.set_caption('Pyxelated')
     pygame.mouse.set_visible(0)
     pygame.key.set_repeat(1, 10)
     Game.Client.init()
