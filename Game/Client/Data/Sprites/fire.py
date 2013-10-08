@@ -13,6 +13,7 @@ class Fire(Abstract_Object):
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
         self.direction = "right"
+        self.original = self.image
         
 
     def update(self):
@@ -38,6 +39,5 @@ class Fire(Abstract_Object):
             self.direction = "right"
         else:
             self.direction = "left"
-        self.original = self.image
 
 

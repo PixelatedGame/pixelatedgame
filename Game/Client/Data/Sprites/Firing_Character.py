@@ -13,5 +13,4 @@ class Firing_Character(Character):
     def _fire(self):
         if not self.isFiring:
             self.isFiring = True 
-            rightDirection = True  
-            self.ranged.fire_fireball(rightDirection, self)
+            self.ranged.fire_fireball(self.data.right, self)
