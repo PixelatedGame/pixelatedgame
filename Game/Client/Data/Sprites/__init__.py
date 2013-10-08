@@ -32,7 +32,8 @@ def get_object(object_name):
         
 def add_sprite(sprite_name, group_name):
     new_sprite = Pixel_Sprite(sprite_name,group_name)
-    sprite_dict[sprite_name] = new_sprite
+    sprite_shortName = sprite_name.split('.', 1)[0]
+    sprite_dict[sprite_shortName] = new_sprite
     
 def get_sprite(sprite_name):
     return sprite_dict[sprite_name]

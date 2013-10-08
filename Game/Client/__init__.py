@@ -9,7 +9,7 @@ import random
 from Game import Pixel_Utils
 import time
 import Game
-from Game.Client.Data.Sprites.Character import Character
+from Game.Client.Data.Sprites.Firing_Character import Firing_Character
 
 
 
@@ -33,7 +33,7 @@ def init():
     
 def init_my_char():
         random_name = ''.join(random.choice('abcde') for x in range(3))
-        Game.Client.my_char = Character("main", "Stavi-" + random_name)
+        Game.Client.my_char = Firing_Character("main", "Stavi-" + random_name)
         clientconnection.update_player(my_char.data)
         
 def update_char(Character):
@@ -46,7 +46,7 @@ def init_charachters():
         
         if remote_character_data.char_name == my_char.char_name:
             continue
-        new_char = Character("main",remote_character_data.char_name)
+        new_char = Firing_Character("main",remote_character_data.char_name)
         new_char.set_data(remote_character_data)
         characters.append(new_char)
     

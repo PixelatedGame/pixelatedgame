@@ -8,7 +8,7 @@ from Game.Client.Data.Sprites.abstract_object import Abstract_Object
 
 class Fire(Abstract_Object):
     def __init__(self,internal_name, attached_object):
-        Abstract_Object.__init__(self)
+        Abstract_Object.__init__(self, internal_name)
         self.attached_object = attached_object
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()

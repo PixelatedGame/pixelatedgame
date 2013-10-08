@@ -14,7 +14,7 @@ class Pixel_Object(pygame.sprite.DirtySprite):
         
     def get_self_sprite(self,modifier = None):
         if modifier == None:
-            return self.sprite_dict[self.internal_name + ".bmp"]
+            return self.sprite_dict[self.internal_name]
         else:
-            return self.sprite_dict[self.internal_name + "_" + modifier + ".bmp"]
+            return self.sprite_dict[self.internal_name + "_" + modifier]
         
