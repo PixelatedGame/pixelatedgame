@@ -43,8 +43,6 @@ def get_sprites(sprite_name):
         if sprite_name in key:
             temp_dict[key] = sprite_dict[key]
     return temp_dict
-        
-    return sprite_dict[sprite_name]
 
 def create_sprite_group(group_name):
     group_dict[group_name] = pygame.sprite.LayeredDirty()

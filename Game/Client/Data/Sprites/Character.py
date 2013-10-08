@@ -16,7 +16,7 @@ class Character(Pixel_Object):
 #         self.name_text = Name_Text(self)
         self.energy_bar = Energy_Bar(self)
         self.data = Charachter_Data(char_name, self.rect)
-        
+    
         
         
 #         self.name_text = Name_Text(game,self.char_name)
