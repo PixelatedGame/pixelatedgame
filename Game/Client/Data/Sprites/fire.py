@@ -29,7 +29,7 @@ class Fire(Abstract_Object):
             self.image = rotate(self.original, -90)
             self.rect[1] += 10
         if not self.area.contains(self.rect):
-            self.charObject.isFiring = False
+            pass
             
     def fire_fireball(self, right, charObject):
         #self.rect = self.attached_object.rect.copy()
