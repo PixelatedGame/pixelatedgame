@@ -22,6 +22,7 @@ class Fire(Abstract_Object):
             self.image = rotate(self.original, 180)
             self.rect[0] -= 10
         if self.direction == "right":
+            self.image = self.original
             self.rect[0] += 10
         if self.direction == "up":
             self.image = rotate(self.original, 90)
