@@ -66,7 +66,7 @@ def update_charachters():
                 break
 
         if not found:                    
-            new_char = Character("main", remote_character_data.char_name)
+            new_char = Firing_Character("main", remote_character_data.char_name)
             new_char.set_data(remote_character_data)
             characters.append(new_char)
         

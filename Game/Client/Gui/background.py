@@ -11,6 +11,6 @@ class Background():
         self.get_default_background()
 
     def get_default_background(self):
-        self.image, self.rect = Pixel_Utils.load_image(r'data\Sprites\Levels\background.bmp', -1)
+        self.image, self.rect = Pixel_Utils.load_image(r'data\Sprites\Levels\TEST5B.bmp', -1)
         self.current_background.blit(self.image, (0,0) )
         return self.current_background
