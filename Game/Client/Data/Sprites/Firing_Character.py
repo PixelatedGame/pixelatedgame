@@ -1,5 +1,6 @@
 from Game.Client.Data.Sprites.Character import Character
 from Game.Client.Data.Sprites.fire import Fire
+from win32con import NULL
 
 
 
@@ -16,11 +17,13 @@ class Firing_Character(Character):
             self.ranged = Fire("fireball",self.rect.copy(),self.data.right)
             
     
-    def update(self):
+    def screen_update(self):
         if self.isFiring:
             if not self.area.contains(self.ranged.rect):
                     self.isFiring = False
-                    self.ranged = []
+                    self.ranged.destory()
+                    self.ranged = NULL
+                    
                 
         self.rect = self.data.rect
         

@@ -19,7 +19,7 @@ class Fire(Abstract_Object):
         self.original = self.image
         
 
-    def update(self):
+    def screen_update(self):
         rotate = pygame.transform.rotate
         if self.direction == "left":
             self.image = rotate(self.original, 180)

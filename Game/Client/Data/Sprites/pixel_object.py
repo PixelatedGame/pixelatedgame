@@ -13,6 +13,21 @@ class Pixel_Object(pygame.sprite.DirtySprite):
             self.sprite_dict = Sprites.get_sprites(self.internal_name)
         game_group.add(self)
         self.dirty =2
+    
+    def update(self):
+        self.screen_update()
+        self.check_bounds()
+        self.check_collision()
+    
+    
+    def screen_update(self):
+        pass
+    
+    def check_bounds(self):
+        pass
+    
+    def check_collision(self):
+        pass   
         
     def get_self_sprite(self,modifier = None):
         if modifier == None:
@@ -20,3 +35,5 @@ class Pixel_Object(pygame.sprite.DirtySprite):
         else:
             return self.sprite_dict[self.internal_name + "_" + modifier]
         
+    def destory(self):
+        game_group.remove(self)

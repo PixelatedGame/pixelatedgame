@@ -30,7 +30,7 @@ class Character(Pixel_Object):
         self.rect = self.data.rect
         
 
-    def update(self):
+    def screen_update(self):
         self.rect = self.data.rect
         
         if self.data.dizzy:
@@ -42,7 +42,7 @@ class Character(Pixel_Object):
             self.image = self.front_sprite.image
         else:
             self.image = self.back_sprite.image
-        
+
 
     def _walk(self):
         pass
@@ -95,4 +95,5 @@ class Charachter_Data():
         self.move = (0,0)
         self.dizzy = 0
         self.up = True
-        self.right = True 
+        self.right = True
+        self.hp = 100
