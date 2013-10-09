@@ -7,6 +7,8 @@ class Pixel_Object(pygame.sprite.DirtySprite):
     def __init__(self, internal_name = None):
         pygame.sprite.DirtySprite.__init__(self)
         self.internal_name = internal_name
+        screen = pygame.display.get_surface()
+        self.area = screen.get_rect()
         if internal_name is not None:
             self.sprite_dict = Sprites.get_sprites(self.internal_name)
         game_group.add(self)

@@ -7,12 +7,15 @@ from Game.Client.Data.Sprites.abstract_object import Abstract_Object
 
 
 class Fire(Abstract_Object):
-    def __init__(self,internal_name, attached_object):
+    def __init__(self,internal_name, source_rect, is_direction_right):
         Abstract_Object.__init__(self, internal_name)
-        self.attached_object = attached_object
-        screen = pygame.display.get_surface()
-        self.area = screen.get_rect()
-        self.direction = "right"
+        self.isFiring = True 
+        self.rect = source_rect
+        if is_direction_right:
+            self.direction = "right"
+        else:
+            self.direction = "left"
+        
         self.original = self.image
         
 
@@ -30,14 +33,11 @@ class Fire(Abstract_Object):
         if self.direction == "down":
             self.image = rotate(self.original, -90)
             self.rect[1] += 10
-        if not self.area.contains(self.rect):
-            self.attached_object.isFiring = False
             
-    def fire_fireball(self, right):
-        self.rect = self.attached_object.rect.copy()
-        if right:
-            self.direction = "right"
-        else:
-            self.direction = "left"
+    def __del__(self):
+        print "omg the fireball was delelted"
+        
+
+       
 
 
