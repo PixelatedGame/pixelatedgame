@@ -10,7 +10,9 @@ from Game import Pixel_Utils
 import time
 import Game
 from Game.Client.Data.Sprites.Firing_Character import Firing_Character
-from Game.Client.Modules import pyganim
+
+from Game.Client.Gui.Hud import hud
+
 
 
 
@@ -31,6 +33,7 @@ def init():
     init_charachters()
     update_thread = Pixel_Utils.thread_func(update_charachters_thread)
     update_thread.start()
+    Game.Client.hud = hud()
     
 def init_my_char():
         random_name = ''.join(random.choice('abcde') for x in range(3))

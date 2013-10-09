@@ -63,6 +63,7 @@ def main():
 
     fist = Pointer("fist")
     
+
     UP = 'up'
     DOWN = 'down'
     LEFT = 'left'
