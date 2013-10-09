@@ -77,13 +77,9 @@ def main():
             elif event.type == KEYDOWN and event.key == K_ESCAPE:
                 return
             elif event.type == MOUSEBUTTONDOWN:
-                if fist.punch(Game.Client.my_char):
-                    Game.Client.sounds.punch_sound.play() #punch
-                    Game.Client.my_char.punched()
-                else:
-                    Game.Client.sounds.whiff_sound.play() #miss
+                pass
             elif event.type is MOUSEBUTTONUP:
-                fist.unpunch()
+                pass
             elif event.type == KEYDOWN and event.key == K_LEFT:
                 Game.Client.my_char._move((-10,0))
                 

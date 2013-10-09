@@ -33,10 +33,6 @@ class Character(Pixel_Object):
     def screen_update(self):
         self.rect = self.data.rect
         
-        if self.data.dizzy:
-            self._spin()
-        else:
-            self._walk()
             
         if self.data.up:
             self.image = self.front_sprite.image
@@ -70,21 +66,6 @@ class Character(Pixel_Object):
         Game.Client.update_char(self)
         
  
-    def _spin(self):
-        center = self.data.rect.center
-        self.data.dizzy = self.data.dizzy + 12
-        if self.data.dizzy >= 360:
-            self.data.dizzy = 0
-            self.image = self.original
-        else:
-            rotate = pygame.transform.rotate
-            self.image = rotate(self.original, self.data.dizzy)
-        self.data.rect = self.image.get_rect(center=center)
-
-    def punched(self):
-        if not self.data.dizzy:
-            self.data.dizzy = 1
-            self.original = self.image
             
 class Charachter_Data():
     def __init__(self, char_name, rect):
@@ -93,7 +74,6 @@ class Charachter_Data():
         self.rect.topleft = 10, 10
         self.location = (0,0)
         self.move = (0,0)
-        self.dizzy = 0
         self.up = True
         self.right = True
         self.hp = 100

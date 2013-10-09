@@ -14,6 +14,6 @@ class Name_Text(Pixel_Object):
         self.image = font.render(self.attached_object.char_name,1, (10, 10, 10))
         self.rect = self.image.get_rect()
 
-    def update(self):
+    def screen_update(self):
                 self.rect.midbottom = self.attached_object.rect.midtop
         

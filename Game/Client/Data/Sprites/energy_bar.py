@@ -17,6 +17,6 @@ class Energy_Bar(Pixel_Object):
         self.image = bar
         self.rect = self.image.get_rect()
 
-    def update(self):
+    def screen_update(self):
                 self.rect.midbottom = self.attached_object.rect.midtop
         

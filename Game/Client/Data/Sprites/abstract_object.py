@@ -10,5 +10,5 @@ class Abstract_Object(Pixel_Object):
         self.image = self.sprite.image
         
 
-    def update(self):
+    def screen_update(self):
         raise NotImplemented

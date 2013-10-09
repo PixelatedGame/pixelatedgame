@@ -5,32 +5,30 @@ from win32con import NULL
 
 
 class Firing_Character(Character):
-    def __init__(self, internal_name, char_name):
+    def __init__(self, internal_name, char_name, ranged_attack="fireball"):
         Character.__init__(self, internal_name, char_name)
-        self.isFiring = False
+        self.data.isFiring = False
+        self.data.ranged_attack = ranged_attack
         
         
     
     def _fire(self):
-        if not self.isFiring:
-            self.isFiring = True
-            self.ranged = Fire("fireball",self.rect.copy(),self.data.right)
+        if not self.data.isFiring:
+            self.data.isFiring = True
+            self.ranged = Fire(self.data.ranged_attack,self.rect.copy(),self.data.right)
             
     
     def screen_update(self):
-        if self.isFiring:
+        if self.data.isFiring:
             if not self.area.contains(self.ranged.rect):
-                    self.isFiring = False
+                    self.data.isFiring = False
                     self.ranged.destory()
                     self.ranged = NULL
                     
                 
         self.rect = self.data.rect
         
-        if self.data.dizzy:
-            self._spin()
-        else:
-            self._walk()
+        
             
         if self.data.up:
             self.image = self.front_sprite.image
