@@ -11,6 +11,7 @@ from Game.Client.Data.Sprites import game_group
 
 
 
+
 if not pygame.font: print 'Warning, fonts disabled'
 if not pygame.mixer: print 'Warning, sound disabled'
 
@@ -60,7 +61,6 @@ def main():
 # SOCK_DGRAM is the socket type to use for UDP sockets
 
     fist = Pointer("fist")
-    
     
 
 #Main Loop
