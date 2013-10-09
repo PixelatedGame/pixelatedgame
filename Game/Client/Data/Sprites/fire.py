@@ -33,9 +33,8 @@ class Fire(Abstract_Object):
         if not self.area.contains(self.rect):
             self.attached_object.isFiring = False
             
-    def fire_fireball(self, right, charObject):
+    def fire_fireball(self, right):
         self.rect = self.attached_object.rect.copy()
-        self.charObject = charObject
         if right:
             self.direction = "right"
         else:

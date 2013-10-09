@@ -8,7 +8,6 @@ class Firing_Character(Character):
         Character.__init__(self, internal_name, char_name)
         self.isFiring = False
         self.ranged = Fire("fireball",self)
-        #        fireball.fire_fireball(Game.Client.my_char.data.rect.copy(), Game.Client.my_char.data.right)
     
     def _fire(self):
         if not self.isFiring:
