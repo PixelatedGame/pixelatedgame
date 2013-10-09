@@ -10,6 +10,7 @@ from Game import Pixel_Utils
 import time
 import Game
 from Game.Client.Data.Sprites.Firing_Character import Firing_Character
+from Game.Client.Modules import pyganim
 
 
 

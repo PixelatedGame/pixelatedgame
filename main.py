@@ -8,6 +8,7 @@ from Game.Client.Gui.background import Background
 from Game.Client.Data.Sprites.fire import Fire
 from Game.Client.Gui.pointer import Pointer
 from Game.Client.Data.Sprites import game_group
+import sys
 
 
 
@@ -62,11 +63,155 @@ def main():
 
     fist = Pointer("fist")
     
+    UP = 'up'
+    DOWN = 'down'
+    LEFT = 'left'
+    RIGHT = 'right'
+    running = moveUp = moveDown = moveLeft = moveRight = False
     
 
 #Main Loop
     while 1:
-        Game.Client.gameclock.tick(60)  # @UndefinedVariable
+        screen.blit(current_background, (0, 0))
+        for event in pygame.event.get(): # event handling loop
+    
+            # handle ending the program
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+    
+                if event.key in (K_LSHIFT, K_RSHIFT):
+                    # player has started running
+                    running = True
+    
+                if event.key == K_UP:
+                    moveUp = True
+                    moveDown = False
+                    if not moveLeft and not moveRight:
+                        # only change the direction to up if the player wasn't moving left/right
+                        direction = UP
+                elif event.key == K_DOWN:
+                    moveDown = True
+                    moveUp = False
+                    if not moveLeft and not moveRight:
+                        direction = DOWN
+                elif event.key == K_LEFT:
+                    moveLeft = True
+                    moveRight = False
+                    if not moveUp and not moveDown:
+                        direction = LEFT
+                elif event.key == K_RIGHT:
+                    moveRight = True
+                    moveLeft = False
+                    if not moveUp and not moveDown:
+                        direction = RIGHT
+    
+            elif event.type == KEYUP:
+                if event.key in (K_LSHIFT, K_RSHIFT):
+                    # player has stopped running
+                    running = False
+    
+                if event.key == K_UP:
+                    moveUp = False
+                    # if the player was moving in a sideways direction before, change the direction the player is facing.
+                    if moveLeft:
+                        direction = LEFT
+                    if moveRight:
+                        direction = RIGHT
+                elif event.key == K_DOWN:
+                    moveDown = False
+                    if moveLeft:
+                        direction = LEFT
+                    if moveRight:
+                        direction = RIGHT
+                elif event.key == K_LEFT:
+                    moveLeft = False
+                    if moveUp:
+                        direction = UP
+                    if moveDown:
+                        direction = DOWN
+                elif event.key == K_RIGHT:
+                    moveRight = False
+                    if moveUp:
+                        direction = UP
+                    if moveDown:
+                        direction = DOWN
+    
+        if moveUp or moveDown or moveLeft or moveRight:
+            # draw the correct walking/running sprite from the animation object
+            moveConductor.play() # calling play() while the animation objects are already playing is okay; in that case play() is a no-op
+            if running:
+                if direction == UP:
+                    animObjs['back_run'].blit(windowSurface, (x, y))
+                elif direction == DOWN:
+                    animObjs['front_run'].blit(windowSurface, (x, y))
+                elif direction == LEFT:
+                    animObjs['left_run'].blit(windowSurface, (x, y))
+                elif direction == RIGHT:
+                    animObjs['right_run'].blit(windowSurface, (x, y))
+            else:
+                # walking
+                if direction == UP:
+                    animObjs['back_walk'].blit(windowSurface, (x, y))
+                elif direction == DOWN:
+                    animObjs['front_walk'].blit(windowSurface, (x, y))
+                elif direction == LEFT:
+                    animObjs['left_walk'].blit(windowSurface, (x, y))
+                elif direction == RIGHT:
+                    animObjs['right_walk'].blit(windowSurface, (x, y))
+    
+    
+            # actually move the position of the player
+            if running:
+                rate = RUNRATE
+            else:
+                rate = WALKRATE
+    
+            if moveUp:
+                y -= rate
+            if moveDown:
+                y += rate
+            if moveLeft:
+                x -= rate
+            if moveRight:
+                x += rate
+    
+        else:
+            # standing still
+            moveConductor.stop() # calling stop() while the animation objects are already stopped is okay; in that case stop() is a no-op
+            if direction == UP:
+                windowSurface.blit(back_standing, (x, y))
+            elif direction == DOWN:
+                windowSurface.blit(front_standing, (x, y))
+            elif direction == LEFT:
+                windowSurface.blit(left_standing, (x, y))
+            elif direction == RIGHT:
+                windowSurface.blit(right_standing, (x, y))
+    
+        # make sure the player does move off the screen
+        if x < 0:
+            x = 0
+        if x > WINDOWWIDTH - playerWidth:
+            x = WINDOWWIDTH - playerWidth
+        if y < 0:
+            y = 0
+        if y > WINDOWHEIGHT - playerHeight:
+            y = WINDOWHEIGHT - playerHeight
+        windowSurface.blit(instructionSurf, instructionRect)
+        pygame.display.update()
+        
+        
+        
+        
+        
+        
+        
+        
+        Game.Client.gameclock.tick(30)  # @UndefinedVariable
         
     
         
@@ -97,7 +242,7 @@ def main():
                 Game.Client.my_char._fire()
                 
         
-        screen.blit(current_background, (0, 0))
+        
         game_group.update()
         game_group.draw(screen)
         pygame.display.flip()
