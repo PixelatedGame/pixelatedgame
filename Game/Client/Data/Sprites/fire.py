@@ -33,9 +33,6 @@ class Fire(Abstract_Object):
         if self.direction == "down":
             self.image = rotate(self.original, -90)
             self.rect[1] += 10
-            
-    def __del__(self):
-        print "omg the fireball was delelted"
         
 
        

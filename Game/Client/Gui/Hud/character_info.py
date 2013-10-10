@@ -4,7 +4,7 @@ from Game.Client.Data.Sprites.gui_object import gui_object
 from Game.Client.Data.Sprites.gui_text import gui_text
 from Game.Client.Data.Sprites.gui_bar import gui_bar
 
-class character_info(gui_object):
+class character_info():
     def __init__(self):
         self.char_name = Game.Client.my_char.char_name
         self.draw_portrait()
