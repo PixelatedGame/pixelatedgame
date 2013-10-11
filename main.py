@@ -219,9 +219,11 @@ def main():
     #Handle Input Events
         for event in pygame.event.get():
             if event.type == QUIT:
-                return
+                pygame.quit()
+                sys.exit()
             elif event.type == KEYDOWN and event.key == K_ESCAPE:
-                return
+                pygame.quit()
+                sys.exit()
             elif event.type == MOUSEBUTTONDOWN:
                 pass
             elif event.type is MOUSEBUTTONUP:
