@@ -25,3 +25,5 @@ class chat():
                 print "split line"
             self.chat_text = gui_text(chatLine, (xpos, ypos), fontColor, fontSize)
             ypos -= lineSpacing
+            
+    
