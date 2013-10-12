@@ -29,6 +29,7 @@ def init():
     Game.Client.clientconnection = Network.clientconnection()
     Game.Client.sounds = Sounds.Game_Sounds()
     Game.Client.Data.Sprites.init()
+    Game.Client.Data.Animations.init()
     init_my_char()
     init_charachters()
     update_thread = Pixel_Utils.thread_func(update_charachters_thread)

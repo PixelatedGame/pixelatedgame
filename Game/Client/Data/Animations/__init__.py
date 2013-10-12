@@ -1,50 +1,51 @@
-import pygame
 import os
-from Game.Client.Data.Sprites import pixel_sprite
-from Game.Client.Data.Sprites.pixel_sprite import Pixel_Sprite
-import Game
+import pprint
+from Game import Pixel_Utils
 
-sprites_dir = 'data\Animations'
-group_dict = {}
-animation_dict = {}
-object_dict = {}
-game_group = pygame.sprite.LayeredDirty() 
-
+sprites_dir = r'C:\Users\timmy\Documents\Aptana Studio 3 Workspace\pixelatedgame\data\Animations'
+data_dir = os.path.join(sprites_dir)
+animations_dict = {}
 
 def init():
-    #
-    data_dir = os.path.join(sprites_dir)
-    dirs = os.listdir(data_dir)
-    for dir in dirs:
-        #for every directory in animations do:
-        data_sub_dir =os.path.join(sprites_dir,dir)
-        if os.path.isdir(data_sub_dir):
-            create_sprite_group(dir)
-            files_data_sub_dir = os.listdir(data_sub_dir)
-            for file_data_sub_dir in files_data_sub_dir:
-                add_sprite(file_data_sub_dir, dir)
+    for root, dirs, files in os.walk(data_dir):
+        if files:
+            object_class =  root.split('\\')[-2]
+            print object_class
+            object_name = root.split('\\')[-1]
+            print object_name
+            
+            for file in files:
+                full_file_dir = os.path.join(sprites_dir, object_class, object_name, file)
+                animation_class = file.split('.')[0]
+                if animation_class in animations_dict:
+                    animations_dict[animation_class].append(Pixel_Utils.load_image(full_file_dir))
+                else:
+                    animations_dict[animation_class] = []
+                    animations_dict[animation_class].append(Pixel_Utils.load_image(full_file_dir))
+    pp = pprint.PrettyPrinter(indent=4)
+    pp.pprint(animations_dict)
               
     
-def add_object(object_name, object):
-    object_dict[object_name] = object
+# def add_object(object_name, object):
+#     object_dict[object_name] = object
+#     
+# def get_object(object_name):
+#     return object_dict[object_name]            
+#         
+# def add_sprite(sprite_name, group_name):
+#     
+#     new_sprite = Pixel_Sprite(sprite_name,group_name)
+#     sprite_shortName = sprite_name.split('.', 1)[0]
+#     sprite_dict[sprite_shortName] = new_sprite
     
-def get_object(object_name):
-    return object_dict[object_name]            
-        
-def add_sprite(sprite_name, group_name):
-    
-    new_sprite = Pixel_Sprite(sprite_name,group_name)
-    sprite_shortName = sprite_name.split('.', 1)[0]
-    sprite_dict[sprite_shortName] = new_sprite
-    
-def get_sprite(sprite_name):
-    return sprite_dict[sprite_name]
+def get_animation(sprite_name):
+    return animation_dict[sprite_name]
 
-def get_sprites(sprite_name):
+def get_animations(sprite_name):
     temp_dict = {}
-    for key in sprite_dict:
+    for key in animation_dict:
         if sprite_name in key:
-            temp_dict[key] = sprite_dict[key]
+            temp_dict[key] = animation_dict[key]
     return temp_dict
 
 def create_sprite_group(group_name):
@@ -60,5 +61,5 @@ def create_sprite_group(group_name):
 #         screen = pygame.display.get_surface()
 #         self.area = screen.get_rect()
 
-
+if __name__ == '__main__': init()
 
