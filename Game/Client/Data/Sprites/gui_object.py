@@ -1,4 +1,5 @@
 from Game.Client.Data.Sprites.pixel_object import Pixel_Object
+import pygame
 
 
 class gui_object(Pixel_Object):

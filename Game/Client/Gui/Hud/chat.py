@@ -4,12 +4,14 @@ from Game.Client.Data.Sprites.gui_text import gui_text
 
 class chat():
     def __init__(self):
+        
         self.chat_messages = [{"name": "some_guy", "message" : "Wow, this is a really long messages! How can it be?" }, {"name" : "Fez", "message" : "McLolz!"}, {"name" : "Timmy", "message" : "Dkalim."}, {"name" : "n00b", "message" : "hi :)"}]
         self.screen = pygame.display.get_surface()
         self.screenX, self.screenY = self.screen.get_size()   
         self.lineLengthLimit = 60
         self.messagesAmountLimit = 5
         self.sorted_messages = []
+        
         self.draw_background()
         self.sort_messages()
         self.draw_messages()
@@ -28,6 +30,9 @@ class chat():
         xpos = self.screenX / 4
         ypos = self.screenY - 80
         self.chatBG.rect.topleft = (xpos, ypos)
+        bgAlpha = 150
+        self.chatBG.image.fill((255, 255, 255, bgAlpha), None, pygame.BLEND_RGBA_MULT)
+        self.chatBG.image.set_alpha(bgAlpha)
         
     def sort_messages(self):
         for item in self.chat_messages:

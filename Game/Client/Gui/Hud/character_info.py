@@ -1,4 +1,3 @@
-import pygame
 import Game
 from Game.Client.Data.Sprites.gui_object import gui_object
 from Game.Client.Data.Sprites.gui_text import gui_text
