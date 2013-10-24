@@ -1,6 +1,8 @@
 import pygame
+from pgu import gui
 from Game.Client.Data.Sprites.gui_object import gui_object
 from Game.Client.Data.Sprites.gui_text import gui_text
+from compiler.ast import Pass
 
 class chat():
     def __init__(self):
@@ -12,7 +14,12 @@ class chat():
         self.messagesAmountLimit = 5
         self.sorted_messages = []
         
+        self.chatNameColor = (255, 0, 0)
+        self.chatTextColor = (255, 255, 255)
+        self.chatFontSize = 16
+        
         self.draw_background()
+        self.draw_input()
         self.sort_messages()
         self.draw_messages()
         
@@ -28,18 +35,22 @@ class chat():
     def draw_background(self):
         self.chatBG = gui_object("chatBG")
         xpos = self.screenX / 4
-        ypos = self.screenY - 80
+        ypos = self.screenY - 100
         self.chatBG.rect.topleft = (xpos, ypos)
-        bgAlpha = 150
+        bgAlpha = 100
         self.chatBG.image.fill((255, 255, 255, bgAlpha), None, pygame.BLEND_RGBA_MULT)
         self.chatBG.image.set_alpha(bgAlpha)
+        
+    def draw_input(self):
+        pass
+        
         
     def sort_messages(self):
         for item in self.chat_messages:
             pName = item["name"]
             pMessage = item["message"]
             chatLine = "%s: %s" % (pName, pMessage)
-            if len(chatLine) > self.lineLengthLimit:
+            if len(chatLine) > self.lineLengthLimit: # Split line according to length
                 splittedLine = self.split_by_length(chatLine, self.lineLengthLimit)
                 for line in splittedLine:
                     self.sorted_messages.append(line)
@@ -47,8 +58,6 @@ class chat():
                 self.sorted_messages.append(chatLine)
         
     def draw_messages(self):  
-        fontColor = (255,255,255)
-        fontSize = 16
         xpos = self.screenX / 4
         ypos = self.screenY - 20
         lineSpacing = 20
@@ -57,7 +66,7 @@ class chat():
         
         for item in self.sorted_messages:
             if not counter + 1 > self.messagesAmountLimit:
-                self.chat_text = gui_text(item, (xpos, ypos), fontColor, fontSize)
+                self.chat_text = gui_text(item, (xpos, ypos), self.chatTextColor, self.chatFontSize)
                 ypos -= lineSpacing
             else:
                 break
