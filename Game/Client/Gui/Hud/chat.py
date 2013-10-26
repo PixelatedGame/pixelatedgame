@@ -2,7 +2,6 @@ import pygame
 from pgu import gui
 from Game.Client.Data.Sprites.gui_object import gui_object
 from Game.Client.Data.Sprites.gui_text import gui_text
-from compiler.ast import Pass
 
 class chat():
     def __init__(self):
