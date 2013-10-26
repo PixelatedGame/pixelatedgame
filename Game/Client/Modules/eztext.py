@@ -27,8 +27,12 @@ class Input:
         self.color = self.options.color
         self.restricted = self.options.restricted
         self.maxlength = self.options.maxlength
-        self.prompt = self.options.prompt; self.value = ''
+        self.prompt = self.options.prompt
+        self.value = ''
+        self.displayedValue = ''
         self.shifted = False
+        self.sliceCounter = 1
+        self.text = None
 
     def set_pos(self, x, y):
         """ Set the position to x, y """
@@ -39,10 +43,15 @@ class Input:
         """ Set the font for the input """
         self.font = font
 
+    '''
     def draw(self, surface):
         """ Draw the text input to a surface """
-        text = self.font.render(self.prompt+self.value, 1, self.color)
+        text = self.font.render(self.prompt+self.displayedValue, 1, self.color)
         surface.blit(text, (self.x, self.y))
+    '''
+        
+    def drawText(self):
+        self.text = self.font.render(self.prompt+self.displayedValue, 1, self.color)
 
     def textUpdate(self, event):
         """ Update the input based on passed events """
@@ -150,5 +159,9 @@ class Input:
                 elif event.key == K_COMMA and '<' in self.restricted: self.value += '<'
                 elif event.key == K_PERIOD and '>' in self.restricted: self.value += '>'
                 elif event.key == K_SLASH and '?' in self.restricted: self.value += '?'
-
-        if len(self.value) > self.maxlength and self.maxlength >= 0: self.value = self.value[:-1]
+                
+        self.displayedValue = self.value
+         
+        if len(self.value) > self.maxlength and self.maxlength >= 0: 
+            self.displayedValue = self.value[self.sliceCounter:]
+            self.sliceCounter += 1

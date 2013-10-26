@@ -34,7 +34,7 @@ class chat():
         
         
     def draw_background(self):
-        self.chatBG = gui_object("chatBG")
+        self.chatBG = gui_object("chatBGnew")
         xpos = self.screenX / 4
         ypos = self.screenY - 100
         self.chatBG.rect.topleft = (xpos, ypos)
@@ -49,7 +49,8 @@ class chat():
         promptText = "Say: "
         maxInputLength = self.lineLengthLimit - len(promptText)
         
-        self.chatInput = gui_input(position = (inputX, inputY), fontStyle = inputFont, inputPrompt = promptText, textLength = maxInputLength)
+        #self.chatInput = gui_input(position = (inputX, inputY), fontStyle = inputFont, inputPrompt = promptText, textLength = maxInputLength)
+        self.chatInput = gui_input(position = (inputX, inputY), fontStyle = inputFont, inputPrompt = promptText, textLength = 10)
     
     def update_input(self, event):
         if event:
