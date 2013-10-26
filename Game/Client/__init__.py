@@ -12,6 +12,7 @@ import Game
 from Game.Client.Data.Sprites.Firing_Character import Firing_Character
 
 from Game.Client.Gui.Hud import hud
+from Game.Client.Data.Animations.pixel_animated_object import Pixel_Animated_Object
 
 
 
@@ -38,6 +39,7 @@ def init():
     
 def init_my_char():
         random_name = ''.join(random.choice('abcde') for x in range(3))
+#         Game.Client.my_char = Firing_Character("main", "Stavi-" + random_name)
         Game.Client.my_char = Firing_Character("main", "Stavi-" + random_name)
         clientconnection.update_player(my_char.data)
         

@@ -82,67 +82,67 @@ def main():
                 sys.exit()
             
      
-        if moveUp or moveDown or moveLeft or moveRight:
-            # draw the correct walking/running sprite from the animation object
-            if running:
-                if direction == UP:
-                    animObjs['back_run'].blit(windowSurface, (x, y))
-                elif direction == DOWN:
-                    animObjs['front_run'].blit(windowSurface, (x, y))
-                elif direction == LEFT:
-                    animObjs['left_run'].blit(windowSurface, (x, y))
-                elif direction == RIGHT:
-                    animObjs['right_run'].blit(windowSurface, (x, y))
-            else:
-                # walking
-                if direction == UP:
-                    animObjs['back_walk'].blit(windowSurface, (x, y))
-                elif direction == DOWN:
-                    animObjs['front_walk'].blit(windowSurface, (x, y))
-                elif direction == LEFT:
-                    animObjs['left_walk'].blit(windowSurface, (x, y))
-                elif direction == RIGHT:
-                    animObjs['right_walk'].blit(windowSurface, (x, y))
-     
-     
-            # actually move the position of the player
-            if running:
-                rate = RUNRATE
-            else:
-                rate = WALKRATE
-     
-            if moveUp:
-                y -= rate
-            if moveDown:
-                y += rate
-            if moveLeft:
-                x -= rate
-            if moveRight:
-                x += rate
-     
-        else:
-            # standing still
-            moveConductor.stop() # calling stop() while the animation objects are already stopped is okay; in that case stop() is a no-op
-            if direction == UP:
-                windowSurface.blit(back_standing, (x, y))
-            elif direction == DOWN:
-                windowSurface.blit(front_standing, (x, y))
-            elif direction == LEFT:
-                windowSurface.blit(left_standing, (x, y))
-            elif direction == RIGHT:
-                windowSurface.blit(right_standing, (x, y))
-     
-        # make sure the player does move off the screen
-        if x < 0:
-            x = 0
-        if x > WINDOWWIDTH - playerWidth:
-            x = WINDOWWIDTH - playerWidth
-        if y < 0:
-            y = 0
-        if y > WINDOWHEIGHT - playerHeight:
-            y = WINDOWHEIGHT - playerHeight
-        windowSurface.blit(instructionSurf, instructionRect)
-        pygame.display.update()
+#         if moveUp or moveDown or moveLeft or moveRight:
+#             # draw the correct walking/running sprite from the animation object
+#             if running:
+#                 if direction == UP:
+#                     animObjs['back_run'].blit(windowSurface, (x, y))
+#                 elif direction == DOWN:
+#                     animObjs['front_run'].blit(windowSurface, (x, y))
+#                 elif direction == LEFT:
+#                     animObjs['left_run'].blit(windowSurface, (x, y))
+#                 elif direction == RIGHT:
+#                     animObjs['right_run'].blit(windowSurface, (x, y))
+#             else:
+#                 # walking
+#                 if direction == UP:
+#                     animObjs['back_walk'].blit(windowSurface, (x, y))
+#                 elif direction == DOWN:
+#                     animObjs['front_walk'].blit(windowSurface, (x, y))
+#                 elif direction == LEFT:
+#                     animObjs['left_walk'].blit(windowSurface, (x, y))
+#                 elif direction == RIGHT:
+#                     animObjs['right_walk'].blit(windowSurface, (x, y))
+#      
+#      
+#             # actually move the position of the player
+#             if running:
+#                 rate = RUNRATE
+#             else:
+#                 rate = WALKRATE
+#      
+#             if moveUp:
+#                 y -= rate
+#             if moveDown:
+#                 y += rate
+#             if moveLeft:
+#                 x -= rate
+#             if moveRight:
+#                 x += rate
+#      
+#         else:
+#             # standing still
+#             moveConductor.stop() # calling stop() while the animation objects are already stopped is okay; in that case stop() is a no-op
+#             if direction == UP:
+#                 windowSurface.blit(back_standing, (x, y))
+#             elif direction == DOWN:
+#                 windowSurface.blit(front_standing, (x, y))
+#             elif direction == LEFT:
+#                 windowSurface.blit(left_standing, (x, y))
+#             elif direction == RIGHT:
+#                 windowSurface.blit(right_standing, (x, y))
+#      
+#         # make sure the player does move off the screen
+#         if x < 0:
+#             x = 0
+#         if x > WINDOWWIDTH - playerWidth:
+#             x = WINDOWWIDTH - playerWidth
+#         if y < 0:
+#             y = 0
+#         if y > WINDOWHEIGHT - playerHeight:
+#             y = WINDOWHEIGHT - playerHeight
+#         windowSurface.blit(instructionSurf, instructionRect)
+#         pygame.display.update()
          
         
         
@@ -169,14 +169,14 @@ def main():
                 pass
             elif event.type == KEYDOWN and event.key == K_LEFT:
                 Game.Client.my_char._move((-10,0))
-                
+                 
             elif event.type == KEYDOWN and event.key == K_RIGHT:
                 Game.Client.my_char._move((10,0))
-                
+                 
             elif event.type == KEYDOWN and event.key == K_UP:
                 Game.Client.my_char.image = Game.Client.my_char.back_sprite.image
                 Game.Client.my_char._move((0,-10))
-                
+                 
             elif event.type == KEYDOWN and event.key == K_DOWN:
                 Game.Client.my_char.image = Game.Client.my_char.back_sprite.image
                 Game.Client.my_char._move((0,10))
