@@ -5,4 +5,7 @@ class hud():
     
     def __init__(self):
         character_info()
-        chat()
+        self.hudChat = chat()
+        
+    def chatInput(self, event):
+        self.hudChat.update_input(event)

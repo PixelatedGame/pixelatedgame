@@ -36,7 +36,7 @@ def main():
     
     pygame.display.set_caption('Pyxelated')
     pygame.mouse.set_visible(0)
-    pygame.key.set_repeat(1, 10)
+#     pygame.key.set_repeat(1, 10)
     Game.Client.init()
     
     background = Background(screen)
@@ -182,6 +182,8 @@ def main():
                 Game.Client.my_char._move((0,10))
             elif event.type == KEYDOWN and event.key == K_SPACE:
                 Game.Client.my_char._fire()
+            else:
+                Game.Client.hud.chatInput(event)
                 
         
         
