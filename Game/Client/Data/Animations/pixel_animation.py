@@ -5,8 +5,6 @@ from Game import Pixel_Utils
 class Pixel_Animation(pygame.sprite.DirtySprite):
     def __init__(self, name, group_name, images, fps = 10):
         pygame.sprite.DirtySprite.__init__(self)
-        for image in images:
-            Pixel_Utils.load_image(image)
         self._images = images
 
         # Track the time we started, and the time between updates.

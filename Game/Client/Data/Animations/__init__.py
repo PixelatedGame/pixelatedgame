@@ -1,8 +1,9 @@
 import os
 import pprint
 from Game import Pixel_Utils
+from Game.Client.Data.Animations.pixel_animation import Pixel_Animation
 
-sprites_dir = r'C:\Users\timmy\Documents\Aptana Studio 3 Workspace\pixelatedgame\data\Animations'
+sprites_dir = r'data\Animations'
 data_dir = os.path.join(sprites_dir)
 animations_dict = {}
 
@@ -13,17 +14,20 @@ def init():
             print object_class
             object_name = root.split('\\')[-1]
             print object_name
-            
+            temp_animations_dict = {}
             for file in files:
                 full_file_dir = os.path.join(sprites_dir, object_class, object_name, file)
                 animation_class = file.split('.')[0]
-                if animation_class in animations_dict:
-                    animations_dict[animation_class].append(Pixel_Utils.load_image(full_file_dir))
+                if animation_class in temp_animations_dict:
+                    temp_animations_dict[animation_class].append(Pixel_Utils.load_image(full_file_dir))
                 else:
-                    animations_dict[animation_class] = []
-                    animations_dict[animation_class].append(Pixel_Utils.load_image(full_file_dir))
-    pp = pprint.PrettyPrinter(indent=4)
-    pp.pprint(animations_dict)
+                    temp_animations_dict[animation_class] = []
+                    temp_animations_dict[animation_class].append(Pixel_Utils.load_image(full_file_dir))
+            for k in temp_animations_dict.keys():
+                animations_dict[k] = Pixel_Animation(k, object_name, temp_animations_dict[k])
+                
+            pp = pprint.PrettyPrinter(indent=4)
+            pp.pprint(animations_dict)
               
     
 # def add_object(object_name, object):
@@ -39,17 +43,17 @@ def init():
 #     sprite_dict[sprite_shortName] = new_sprite
     
 def get_animation(sprite_name):
-    return animation_dict[sprite_name]
+    return animations_dict[sprite_name]
 
 def get_animations(sprite_name):
     temp_dict = {}
-    for key in animation_dict:
+    for key in animations_dict:
         if sprite_name in key:
-            temp_dict[key] = animation_dict[key]
+            temp_dict[key] = animations_dict[key]
     return temp_dict
 
-def create_sprite_group(group_name):
-    group_dict[group_name] = pygame.sprite.LayeredDirty()
+# def create_sprite_group(group_name):
+#     group_dict[group_name] = pygame.sprite.LayeredDirty()
 
 
 
