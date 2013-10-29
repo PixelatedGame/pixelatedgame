@@ -44,7 +44,7 @@ class chat():
         
     def draw_input(self):
         inputX = self.screenX / 4
-        inputY = self.screenY - 20
+        inputY = self.screenY - 17
         inputFont = pygame.font.Font(None, self.chatFontSize)
         promptText = "Say: "
         maxInputLength = self.lineLengthLimit - len(promptText)

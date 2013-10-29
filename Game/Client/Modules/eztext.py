@@ -75,6 +75,8 @@ class Input:
             elif event.key == K_SPACE: self.value += ' '
             elif event.key == K_RETURN: # Enter 
                 self.looseFocus()
+            else:
+                pass # Stop cursor from blinking while typing 
             if not self.shifted:
                 if event.key == K_a and 'a' in self.restricted: self.value += 'a'
                 elif event.key == K_b and 'b' in self.restricted: self.value += 'b'
@@ -182,7 +184,7 @@ class Input:
         if not self.isBlinking:
             self.exitThread = False
             self.isBlinking = True
-            self.blinkThread = thread.start_new_thread(self.cursorBlink, () )
+            self.blinkThread = thread.start_new_thread(self.cursorBlink, () ) # Start cursor blink thread
         self.textUpdate(event)
         
     def looseFocus(self):
@@ -191,14 +193,15 @@ class Input:
         if self.isBlinking:
             self.isBlinking = False
             self.cursor = ''
-            self.exitThread = True
+            self.exitThread = True # Stop cursor blink thread
     
     def cursorBlink(self):
         while True:
-            if self.cursor == "" and self.isBlinking:
-                self.cursor = "|"
-            else:
-                self.cursor = ""
-            if self.exitThread:
+            if self.isBlinking:
+                if self.cursor == "":
+                    self.cursor = "|"
+                else:
+                    self.cursor = ""
+            if self.exitThread: # Thread exit
                 return
             sleep(self.cursorBlinkSpeed)
