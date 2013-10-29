@@ -17,5 +17,7 @@ class gui_input(Pixel_Object):
         
     def screen_update(self, event = None):
         if event:
-            self.textBox.textUpdate(event)
-            self.drawText()
+            self.textBox.getFocus(event)
+            
+    def update(self):
+        self.drawText()

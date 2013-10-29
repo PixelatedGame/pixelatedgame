@@ -70,6 +70,8 @@ def main():
     RIGHT = 'right'
     running = moveUp = moveDown = moveLeft = moveRight = False
     
+    currentFocus = "main"
+    
 
 #Main Loop
     while 1:
@@ -156,6 +158,9 @@ def main():
     
         
     #Handle Input Events
+    
+         
+        
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -167,24 +172,28 @@ def main():
                 pass
             elif event.type is MOUSEBUTTONUP:
                 pass
-            elif event.type == KEYDOWN and event.key == K_LEFT:
-                Game.Client.my_char._move((-10,0))
-                 
-            elif event.type == KEYDOWN and event.key == K_RIGHT:
-                Game.Client.my_char._move((10,0))
-                 
-            elif event.type == KEYDOWN and event.key == K_UP:
-                Game.Client.my_char.image = Game.Client.my_char.back_sprite.image
-                Game.Client.my_char._move((0,-10))
-                 
-            elif event.type == KEYDOWN and event.key == K_DOWN:
-                Game.Client.my_char.image = Game.Client.my_char.back_sprite.image
-                Game.Client.my_char._move((0,10))
-            elif event.type == KEYDOWN and event.key == K_SPACE:
-                Game.Client.my_char._fire()
-            else:
+            
+            if currentFocus == "main":
+                if event.type == KEYDOWN and event.key == K_LEFT:
+                    Game.Client.my_char._move((-10,0))
+                elif event.type == KEYDOWN and event.key == K_RIGHT:
+                    Game.Client.my_char._move((10,0))
+                elif event.type == KEYDOWN and event.key == K_UP:
+                    Game.Client.my_char.image = Game.Client.my_char.back_sprite.image
+                    Game.Client.my_char._move((0,-10))
+                elif event.type == KEYDOWN and event.key == K_DOWN:
+                    Game.Client.my_char.image = Game.Client.my_char.back_sprite.image
+                    Game.Client.my_char._move((0,10))
+                elif event.type == KEYDOWN and event.key == K_SPACE:
+                    Game.Client.my_char._fire()
+            elif currentFocus == "chat":
                 Game.Client.hud.chatInput(event)
                 
+            if event.type == KEYDOWN and event.key == K_t: # Set focus to chat
+                currentFocus = "chat"
+            elif event.type == KEYDOWN and event.key == K_RETURN: # Return focus to main
+                currentFocus = "main"
+            
         
         
         game_group.update()

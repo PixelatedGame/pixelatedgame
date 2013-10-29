@@ -1,6 +1,8 @@
 # input lib
 from pygame.locals import *
 import pygame, string
+import thread
+from time import sleep
 
 class ConfigError(KeyError): pass
 
@@ -33,6 +35,15 @@ class Input:
         self.shifted = False
         self.sliceCounter = 1
         self.text = None
+        self.cursor = ""
+        self.isFocused = False
+        self.isBlinking = False
+        self.cursorBlinkSpeed = 0.7
+        self.blinkThread = None
+        self.exitThread = False
+        
+        
+        
 
     def set_pos(self, x, y):
         """ Set the position to x, y """
@@ -51,7 +62,7 @@ class Input:
     '''
         
     def drawText(self):
-        self.text = self.font.render(self.prompt+self.displayedValue, 1, self.color)
+        self.text = self.font.render(self.prompt+self.displayedValue+self.cursor, 1, self.color)
 
     def textUpdate(self, event):
         """ Update the input based on passed events """
@@ -62,7 +73,8 @@ class Input:
             if event.key == K_BACKSPACE: self.value = self.value[:-1]
             elif event.key == K_LSHIFT or event.key == K_RSHIFT: self.shifted = True
             elif event.key == K_SPACE: self.value += ' '
-            elif event.key == K_RETURN: self.value = ''
+            elif event.key == K_RETURN: # Enter 
+                self.looseFocus()
             if not self.shifted:
                 if event.key == K_a and 'a' in self.restricted: self.value += 'a'
                 elif event.key == K_b and 'b' in self.restricted: self.value += 'b'
@@ -165,3 +177,28 @@ class Input:
         if len(self.value) > self.maxlength and self.maxlength >= 0: 
             self.displayedValue = self.value[self.sliceCounter:]
             self.sliceCounter += 1
+            
+    def getFocus(self, event):
+        if not self.isBlinking:
+            self.exitThread = False
+            self.isBlinking = True
+            self.blinkThread = thread.start_new_thread(self.cursorBlink, () )
+        self.textUpdate(event)
+        
+    def looseFocus(self):
+        print self.value
+        self.value = ''
+        if self.isBlinking:
+            self.isBlinking = False
+            self.cursor = ''
+            self.exitThread = True
+    
+    def cursorBlink(self):
+        while True:
+            if self.cursor == "" and self.isBlinking:
+                self.cursor = "|"
+            else:
+                self.cursor = ""
+            if self.exitThread:
+                return
+            sleep(self.cursorBlinkSpeed)

@@ -49,8 +49,7 @@ class chat():
         promptText = "Say: "
         maxInputLength = self.lineLengthLimit - len(promptText)
         
-        #self.chatInput = gui_input(position = (inputX, inputY), fontStyle = inputFont, inputPrompt = promptText, textLength = maxInputLength)
-        self.chatInput = gui_input(position = (inputX, inputY), fontStyle = inputFont, inputPrompt = promptText, textLength = 10)
+        self.chatInput = gui_input(position = (inputX, inputY), fontStyle = inputFont, inputPrompt = promptText, textLength = maxInputLength)
     
     def update_input(self, event):
         if event:
